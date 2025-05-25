@@ -64,13 +64,12 @@
                                         <td class="text-center">{{$item->price}}</td>
                                         <td class="text-center">{{$item->quantity}}</td>
                                     <td class="text-center">  
-                                          <div class="list-icon-function view-icon">
-                                             <div class="item eye">
-                                             <i class="fas fa-eye"></i>
-                                            </div>
-                                         </div>
-                                        </a>
-                                    </td>
+    <a href="{{ route('shop.product.details', ['id' => $item->product->id]) }}" title="View Product" class="list-icon-function view-icon">
+        <div class="item eye">
+            <i class="fas fa-eye"></i>
+        </div>
+    </a>
+</td>
                                     </tr>
                             @endforeach
                              </tbody>
