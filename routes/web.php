@@ -1,11 +1,13 @@
 <?php
 
+
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+
 
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Controllers\OrderController; // Import controller-K
@@ -14,29 +16,32 @@ use App\Http\Controllers\OrderItemController;// Import controller-K
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Auth\GoogleController;
 
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 //Login
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard',[UserController::class, 'index'])->name('user.index');
-    Route::put('/account-dashboard', [UserController::class, 'edit_details'])->name('user.update'); // Xử lý cập nhật thông tin
-
 });
+
 
 Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
+
 
     //Admin quan ly don hang
     Route::get('/admin/order',[OrderController::class,'orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/details' ,[OrderItemController::class,'order_details'])->name('admin.order.details');
     Route::put('/admin/order/update-status',[OrderItemController::class,'update_order_status'])->name('admin.order.status.update');
-    
+   
     //Admin dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
 
     //Admin quan ly coupon
     Route::get('/admin/coupon',[AdminController::class,'coupons'])->name('admin.coupon');
     Route::get('/admin/addcoupon',[AdminController::class,'add_coupon'])->name('admin.addcoupon');
     Route::post('/admin/coupon_store',[AdminController::class,'coupon_store'])->name('admin.coupon.store');
+
 
     //Admin quan ly san pham
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
@@ -47,10 +52,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::put('/admin/edit',[AdminController::class,'edit_product'])->name('admin.edit');
     Route::delete('/admin/{id}/delete',[AdminController::class,'delete_product'])->name('admin.delete');
 
+
 });
+
 
 // Register
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
 
 //Xử lý giỏ hàng
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -61,9 +69,12 @@ Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_
 Route::post('/cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
 Route::get('/cart/coupon/remove', [CartController::class, 'remove_coupon'])->name('cart.coupon.remove');
 
+
 //Xử lý đơn hàng
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/order-confirmation', [CartController::class, 'order_confirmation'])->name('cart.order.confirmation');
+
+
 
 
 //Route thanh toán
@@ -74,6 +85,8 @@ Route::get('/vnpay-callback', [CartController::class, 'vnpay_callback'])->name('
 Route::post('/cart/buy-now', [CartController::class, 'buy_now'])->name('cart.buy_now');
 
 
+
+
 //Xử lý shop
 Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
 Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'aboutus'])->name('aboutus.index');
@@ -81,11 +94,14 @@ Route::get('/product/{id}', [ShopController::class, 'details'])->name('shop.prod
 Auth::routes();
 Route::get('/shop/{id}', [ShopController::class,'product_details'])->name('shop.product.details');
 
+
 //Tìm kiếm sản phẩm
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
+
 //Xử lý đơn hàng
 Route::get('/order',[OrderController::class,'orders'])->name('orders');
+
 
 //Google
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

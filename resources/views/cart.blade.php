@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+
 @push('styles')
   <link rel="stylesheet" href="{{ asset('assets/css/giohang.css') }}" />
 @endpush
+
 
 @section('content')
 <style>
@@ -84,7 +86,7 @@
           </tbody>
           </table>
         </div>
-        
+       
       <div class="shopping-cart__totals-wrapper">
         <div class="sticky-content">
           <div class="shopping-cart__totals">
@@ -134,6 +136,7 @@
               </table>
             @endif
 
+
           </div>
           <div>
           @if(Session::has('success'))
@@ -141,6 +144,7 @@
           @elseif(Session::has('error'))
          <p class="text-error">{{Session::get('error')}}</p>
          @endif
+
 
           </div>
           <div class="mobile_fixed-btn_wrapper">
@@ -150,7 +154,7 @@
           </div>
       </div>
     </div>
-      @else 
+      @else
         <div class="empty-cart">
             <h2>Giỏ hàng của bạn đang trống</h2>
             <br>

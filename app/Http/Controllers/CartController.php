@@ -34,19 +34,18 @@ class CartController extends Controller
             'size' => $request->size
         ]
 
-
+       
         )->associate('App\Models\Product');
          
         return redirect()->back();
        
     }
-    
     // Thêm method buy_now mới
     public function buy_now(Request $request)
     {
         // Xóa giỏ hàng hiện tại
         Cart::instance('cart')->destroy();
-        
+       
         // Thêm sản phẩm vào giỏ hàng
         Cart::instance('cart')->add(
             $request->id,
@@ -58,18 +57,21 @@ class CartController extends Controller
                 'size' => $request->size
             ]
         )->associate('App\Models\Product');
-        
+       
         // Chuyển hướng đến trang checkout
         return redirect()->route('cart.checkout');
     }
+
 
     public function remove($rowId)
     {
         Cart::instance('cart')->remove($rowId);
 
+
         // Chuyển hướng lại trang giỏ hàng với thông báo thành công
         return redirect()->back()->with('success', 'Product removed from cart!');
     }
+
 
     public function increase_cart_quantity($rowId)
     {
@@ -78,6 +80,7 @@ class CartController extends Controller
         Cart::instance('cart')->update($rowId, $qty);
         return redirect()->back();
     }
+
 
     public function decrease_cart_quantity($rowId)
     {
@@ -91,16 +94,18 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+
     public function checkout()
     {
         if(!Auth::check()){
             return redirect()->route('login');
         }
-        
+       
         $this->setAmountForCheckout();
-        
+       
         return view('checkout');
     }
+
 
     public function place_an_order(Request $request)
     {
@@ -111,9 +116,12 @@ class CartController extends Controller
             'mode' => 'required',
         ]);
 
+
         $user_id = Auth::user()->id;
 
+
         $this->setAmountForCheckout();
+
 
         if ($request->mode == 'vnpay') {
             Session::put('order_data', [
@@ -121,7 +129,7 @@ class CartController extends Controller
                 'phone' => $request->phone,
                 'address' => $request->address,
             ]);
-            
+           
             return $this->vnpay_payment();
         }
         $order = new Order();
@@ -132,6 +140,7 @@ class CartController extends Controller
         $order->address = $request->address;
         $order->save();
 
+
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
@@ -141,11 +150,13 @@ class CartController extends Controller
             $orderItem->save();
         }
 
+
         $transaction = new Transaction();
         $transaction->user_id = $user_id;
         $transaction->order_id = $order->id;
-        $transaction->mode = $request->mode; 
+        $transaction->mode = $request->mode;
         $transaction->save();
+
 
         // Dọn dẹp giỏ hàng và session
         Cart::instance('cart')->destroy();
@@ -153,13 +164,16 @@ class CartController extends Controller
         Session::forget('coupon');
         Session::forget('discounts');
 
+
         Session::put('order_id', $order->id);
+
 
         return redirect()->route('cart.order.confirmation');
     }
 
+
     public function setAmountForCheckout()
-    { 
+    {
         if(!Cart::instance('cart')->count() > 0)
         {
             Session::forget('checkout');
@@ -179,8 +193,8 @@ class CartController extends Controller
             Session::put('checkout',[
                 'discount' => 0,
                 'subtotal' => Cart::instance('cart')->subtotal(),
-                'tax' => Cart::instance('cart')->tax(),
-                'total' => Cart::instance('cart')->total() 
+                'tax' => Cart::instance('cart')->tax(), 
+          
             ]);
         }
     }
