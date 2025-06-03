@@ -31,9 +31,9 @@
     width: 80%;
     height: auto;
     padding: 30px;
-    background-color: #f7f7f7;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
     border-radius: 10px;
+    border: 1px solid #ccc;
 }
 
 .create-coupon-form input[type="submit"] {
@@ -69,12 +69,11 @@
 .form-group input,
 .form-group textarea {
     width: 70%;
-    border-color: #ffffff;
+    padding: 5px;
 }
 textarea {
     font-size: 14px;
     width: 70%;
-    border: 2px inset #ffffff;
     resize: none;
 }
 
@@ -89,4 +88,4 @@ textarea {
     .form-group input {
         width: 80%;
     }
-  
+}

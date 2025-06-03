@@ -158,13 +158,13 @@
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
+    margin-bottom: 100px;
 }
 
 .pagination a,
 .pagination span {
     padding: 8px 12px;
     text-decoration: none;
-    border: 1px solid #ccc;
     border-radius: 4px;
     color: #333;
     transition: background-color 0.2s;

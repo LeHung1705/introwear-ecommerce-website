@@ -286,7 +286,7 @@ class CartController extends Controller
         // Lấy tổng tiền từ session
         $total = 0;
         if (Session::has('discounts')) {
-            $total = (float) str_replace(['.',','], '', Session::get('discounts')['total']);
+            $total = (float) str_replace(['.',','], '', Session::get('discounts')['total']) + 20000;
         } else {
             $total = (float) str_replace(',', '', Cart::instance('cart')->subtotal()) + 20000;
         }

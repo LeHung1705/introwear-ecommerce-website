@@ -5,6 +5,13 @@
 @endpush
 
 @section('content')
+<style>
+    .filter-section ul li a.active {
+    font-weight: bold; 
+    color: black; 
+    text-decoration: underline; 
+}
+</style>
 <div class="breadcrumb-bar">
     <div class="breadcrumb-text">
         <a href="{{route('home.index')}}" class="subnav">
@@ -28,13 +35,32 @@
     <div class="filter-section">
         <h3>SẮP XẾP</h3>
         <ul>
-            <li><a href="#">Sản phẩm bán chạy</a></li>
-            <li><a href="#">Giá từ thấp đến cao</a></li>
-            <li><a href="#">Giá từ cao đến thấp</a></li>
-            <li><a href="#">Sản phẩm mới nhất</a></li>
+            <li>
+                <a href="{{ route('shop.index', ['sort' => 'best_selling']) }}" 
+                   class="{{ request('sort') == 'best_selling' ? 'active' : '' }}">
+                   Sản phẩm bán chạy
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('shop.index', ['sort' => 'price_low_high']) }}" 
+                   class="{{ request('sort') == 'price_low_high' ? 'active' : '' }}">
+                   Giá từ thấp đến cao
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('shop.index', ['sort' => 'price_high_low']) }}" 
+                   class="{{ request('sort') == 'price_high_low' ? 'active' : '' }}">
+                   Giá từ cao đến thấp
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('shop.index', ['sort' => 'newest']) }}" 
+                   class="{{ request('sort') == 'newest' ? 'active' : '' }}">
+                   Sản phẩm mới nhất
+                </a>
+            </li>
         </ul>
     </div>
-
     <!-- Product list -->
     <div class="product-list">
         @foreach ($products as $product)
@@ -57,6 +83,8 @@
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="name" value="{{$product->product_name}}">
                     <input type="hidden" name="price" value="{{$product->price_sale == '' ? $product->price : $product->price_sale}}">
+                    <input type="hidden" name="size" value="{{ $product->size }}">
+                    <input type="hidden" name="color" value="{{ $product->color }}">
                     <button type="submit" class="add-to-cart">Add to cart</button>
                 </form>
                 @endif

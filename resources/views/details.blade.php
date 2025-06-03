@@ -66,9 +66,12 @@
             </div>
           </div>
           <!-- Form cho "Thêm vào giỏ" -->
+          @if(Cart::instance('cart')->content()->where('id', $product->id)->count() > 0)
+            <a href="{{route('cart.index')}}" class="add-to-cart" style="font-weight:400px;">Go to cart</a>
+          @else
           <form action="{{route('cart.add')}}" method="post" enctype="multipart/form-data">
             @csrf
-           <div class="quantity-wrapper">
+             <div class="quantity-wrapper">
                 <label for="quantity" class="quantity-label">Số lượng</label>
                    <div class="quantity-control">
                         <input type="number" id="quantity" name="quantity" class="quantity-input" value="1" min="1" />
@@ -93,7 +96,8 @@
             <button type="submit" class="add-to-cart">
               <span class="text" style='font-weight: 400'>THÊM VÀO GIỎ</span>
             </button>
-            </form>
+          </form>
+          @endif
 
           <div class="product-description">
             <button class="product-description-item">

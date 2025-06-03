@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('stock_quantity');
             $table->enum('status_product',['Còn hàng','Hết hàng']);
-            $table->unsignedBigInteger('supplier_id')->nullable();
+            $table->string('supplier_id')->nullable();
             $table->string('image');   
              $table->timestamps();
          });
