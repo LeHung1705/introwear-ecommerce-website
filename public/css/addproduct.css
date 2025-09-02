@@ -1,8 +1,10 @@
 .content {
-    padding: 2rem;
+    padding: 24px; 
     flex: 1;
-
+    background-color: #f5f7fa;
+    min-height: 100vh;
 }
+
 
   .add-product-form {
     max-width: 800px;
@@ -12,93 +14,82 @@
     background-color: #f9f9f9;
 }
 
-  .add-product-form h2 {
-
+.add-product-form h2 {
     text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
+    margin-bottom: 16px; 
+    font-size: 20px; 
     text-transform: uppercase;
-
+    color: #000;
     font-family: "Trispace", sans-serif;
+    font-weight: 600;
 }
+
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 12px; 
 }
+
 .form-group label {
     display: block;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 4px; 
+    color: #000;
     font-family: "Trispace", sans-serif;
+    font-size: 14px; 
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-
-    font-family: 'Trispace', sans-serif;
-  }
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    font-family: 'Trispace', sans-serif;
-  }
-  .form-group input,
-  .form-group textarea {
-
     width: 100%;
     padding: 0.5rem;
     border: 1px solid black;
     border-radius: 3px;
     font-size: 1rem;
     box-sizing: border-box;
-
-    font-family: "Trispace", sans-serif;
+    transition: border-color 0.3s ease;
 }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4682b4;
+    outline: none;
+}
+
 .form-group textarea {
     resize: vertical;
-    height: 80px;
+    height: 60px;
 }
+
 .form-group input[readonly] {
-    background-color: #d3d3d3;
+    background-color: #e0e0e0;
     cursor: not-allowed;
 }
+
 .form-group button {
-
-    font-family: 'Trispace', sans-serif;
-  }
-  .form-group textarea {
-    resize: vertical;
-    height: 80px;
-  }
-  .form-group input[readonly] {
-    background-color: #d3d3d3;
-    cursor: not-allowed;
-  }
-  .form-group button {
-
     width: 100%;
-    padding: 0.75rem;
-    background-color: #333;
-    color: white;
-    border: none;
+    padding: 12px; 
+    background-color: #ccc;
+    color: #000;
+    border: 1px solid grey;
     border-radius: 3px;
-    font-size: 1rem;
+    font-size: 14px;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 12px; 
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
 
-    font-family: "Trispace", sans-serif;
-}
 .form-group button:hover {
-    background-color: #555;
+    background-color: #7cafd1;
 }
+
 #imgpreview {
     width: 100%;
     text-align: center;
+    margin-top: 12px; 
 }
+
 #imgpreview img {
     max-width: 100%;
     height: auto;
@@ -108,12 +99,15 @@
     display: block;
     margin: 0 auto;
 }
+
 #galUpload {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
+    margin-top: 12px; 
 }
+
 .gallery-preview {
     max-width: 100px;
     height: auto;
@@ -130,28 +124,33 @@
         display: none;
     }
     .content {
-        padding: 1rem;
+        padding: 16px; 
     }
     .add-product-form {
-        padding: 1rem;
+        padding: 16px;
     }
     .form-group {
-        margin-bottom: 1rem;
+        margin-bottom: 12px;
     }
     .item.up-load {
-        padding: 0.75rem;
+        padding: 12px;
         min-height: 100px;
     }
     .icon {
-        font-size: 1.2rem;
+        font-size: 19px; 
     }
     .body-text {
-        font-size: 0.8rem;
+        font-size: 13px; 
     }
     .gallery-preview {
         max-width: 80px;
     }
 }
+
+
+@media (max-width: 480px) {
+    .add-product-form h2 {
+        font-size: 20px;
 
   .form-group button:hover {
     background-color: #555;
@@ -191,27 +190,15 @@
     .sidebar {
       display: none;
     }
-    .content {
-      padding: 1rem;
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
     }
-    .add-product-form {
-      padding: 1rem;
+    .form-group button {
+        font-size: 14px;
     }
-    .form-group {
-      margin-bottom: 1rem;
+    .gallery-preview {
+        max-width: 80px;
     }
-    .item.up-load {
-    padding: 0.75rem;
-    min-height: 100px;
-  }
-  .icon {
-    font-size: 1.2rem;
-  }
-  .body-text {
-    font-size: 0.8rem;
-  }
-  .gallery-preview {
-    max-width: 80px;
-  }
 }
-

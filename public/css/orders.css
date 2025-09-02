@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 30px;
     
 }
 
@@ -26,6 +26,7 @@
     align-items: center;
     width: 95%;
     gap: 30px;
+    margin-bottom: 30px;
 }
 
 .orders-title {
@@ -84,8 +85,7 @@
     min-width: 900px;
     border-collapse: collapse;
     border: rgb(199, 224, 245) solid 1px;
-    margin-bottom: 40px;
-    margin-top: 20px;
+    margin: 20px 0px;
 }
 
 .orders-table th,
