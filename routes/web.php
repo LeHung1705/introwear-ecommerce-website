@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\FeedbackController;
+use App\Models\Feedback;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Controllers\OrderController; // Import controller-K
 use App\Http\Controllers\Auth\RegisterController;
@@ -29,7 +30,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin/order',[OrderController::class,'orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/details' ,[OrderItemController::class,'order_details'])->name('admin.order.details');
     Route::put('/admin/order/update-status',[OrderItemController::class,'update_order_status'])->name('admin.order.status.update');
-    
+    Route::get('/admin/orders/export', [OrderController::class, 'export'])->name('admin.orders.export');
     //Admin dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
@@ -79,6 +80,8 @@ Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'aboutus'])
 Route::get('/product/{id}', [ShopController::class, 'details'])->name('shop.product.details');
 Auth::routes();
 Route::get('/shop/{id}', [ShopController::class,'product_details'])->name('shop.product.details');
+Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.form');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 //Tìm kiếm sản phẩm
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
