@@ -13,12 +13,13 @@
                 {{ session('success') }}
             </div>
         @endif
-        @if(session('output'))
-    <div style="margin-top: 10px; padding: 10px; border: 1px solid green;">
-        <strong>Kết quả command:</strong><br>
-        {{ session('output') }}
-    </div>
-@endif
+
+        @if(session('error'))
+            <div style="color:red">
+        {{ session('error') }}
+            </div>
+        @endif
+      
         <form method="POST" action="{{ route('feedback.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">

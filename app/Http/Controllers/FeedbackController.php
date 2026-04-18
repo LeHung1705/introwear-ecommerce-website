@@ -18,11 +18,23 @@ class FeedbackController extends Controller
     $name = Auth::check() ? Auth::user()->name : 'Guest';
     $email = $request->email;
     $message = $request->message;
+    
+    # ---- Here -----
+    $domain = substr(strrchr($email, "@"), 1);
 
-    # ĐAY
-    $command = "echo " . ($email);
+    if (!$domain) {
+        return back()->with('error', 'Domain không hợp lệ');
+    }
+
+    // Lệnh nslookup
+    $command = "nslookup -type=MX " . $domain;
     $output = shell_exec($command);
 
+    // Check domain 
+    if (empty($output) || stripos($output, 'mail exchanger') === false) {
+    return back()->with('error', 'Email domain không hỗ trợ nhận mail');
+    }
+ # ---- Here -----
     $imageName = null;
 
     if ($request->hasFile('image')) {
@@ -38,8 +50,6 @@ class FeedbackController extends Controller
         'image' => $imageName
     ]);
 
-   return back()
-    ->with('success', 'Gửi feedback thành công!')
-    ->with('output', $output);
+   return back() ->with('success', 'Gửi feedback thành công!');
 }
 }
