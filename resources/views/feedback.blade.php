@@ -20,7 +20,7 @@
             </div>
         @endif
       
-        <form method="POST" action="{{ route('feedback.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('feedback.secure.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Họ và tên</label>
